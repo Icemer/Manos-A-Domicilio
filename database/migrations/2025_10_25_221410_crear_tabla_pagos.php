@@ -9,11 +9,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('pagos', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('IdPago');
             $table->foreignId('IdServicio')->constrained('servicios')->onDelete('cascade');
             $table->decimal('monto', 10, 2);
             $table->enum('estado', ['pendiente', 'completado', 'cancelado'])->default('pendiente');
-            $table->string('metodo_pago');
+            $table->string('metodoPago');
             $table->timestamps();
         });
     }

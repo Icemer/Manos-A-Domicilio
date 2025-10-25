@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('direccionesCliente', function (Blueprint $table) {
-            $table->id('IdDireccionesCliente');
+            $table->bigIncrements('IdDireccionesCliente');
             $table->foreignId('IdUsuario')->constrained('users')->onDelete('cascade');
             $table->foreignId('IdZona')->constrained('zonas')->onDelete('cascade');
             $table->string('calle');

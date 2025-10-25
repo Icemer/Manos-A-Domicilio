@@ -8,8 +8,8 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('etiquetas_trabajador', function (Blueprint $table) {
-            $table->id();
+        Schema::create('etiquetasTrabajador', function (Blueprint $table) {
+            $table->bigIncrements('IdEtiquetasTrabajador');
             $table->foreignId('IdTrabajador')->constrained('trabajadores')->onDelete('cascade');
             $table->foreignId('IdEtiqueta')->constrained('etiquetas')->onDelete('cascade');
             $table->timestamps();

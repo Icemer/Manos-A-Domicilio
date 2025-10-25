@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('etiquetas', function (Blueprint $table) {
-            $table->id('IdEtiqueta');
+            $table->bigIncrements('IdEtiqueta');
             $table->string('nombre');
             $table->timestamps();
         });

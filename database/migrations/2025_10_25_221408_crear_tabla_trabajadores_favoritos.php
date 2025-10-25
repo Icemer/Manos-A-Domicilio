@@ -8,8 +8,8 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('trabajadores_favoritos', function (Blueprint $table) {
-            $table->id();
+        Schema::create('trabajadoresFavoritos', function (Blueprint $table) {
+            $table->bigIncrements('IdTrabajadoresFavoritos');
             $table->foreignId('IdUsuario')->constrained('users')->onDelete('cascade');
             $table->foreignId('IdTrabajador')->constrained('trabajadores')->onDelete('cascade');
             $table->timestamps();
