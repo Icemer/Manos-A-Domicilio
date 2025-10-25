@@ -10,14 +10,21 @@ return new class extends Migration
     {
         Schema::create('etiquetasTrabajador', function (Blueprint $table) {
             $table->bigIncrements('IdEtiquetasTrabajador');
-            $table->foreignId('IdTrabajador')->constrained('trabajadores')->onDelete('cascade');
-            $table->foreignId('IdEtiqueta')->constrained('etiquetas')->onDelete('cascade');
+            
+            //Relacion Trabajador
+            $table->unsignedBigInteger('IdTrabajador');
+            $table->foreign('IdTrabajador')->references('IdTrabajador')->on('trabajadores')->onDelete('cascade');
+            
+            //Relacion Etiqueta
+            $table->unsignedBigInteger('IdEtiqueta');
+            $table->foreign('IdEtiqueta')->references('IdEtiqueta')->on('etiquetas')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('etiquetas_trabajador');
+        Schema::dropIfExists('etiquetasTrabajador');
     }
 };

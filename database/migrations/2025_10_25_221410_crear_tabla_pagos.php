@@ -10,7 +10,11 @@ return new class extends Migration
     {
         Schema::create('pagos', function (Blueprint $table) {
             $table->bigIncrements('IdPago');
-            $table->foreignId('IdServicio')->constrained('servicios')->onDelete('cascade');
+            
+            //Relacion Servicio
+            $table->unsignedBigInteger('IdServicio');
+            $table->foreign('IdServicio')->references('IdServicio')->on('servicios')->onDelete('cascade');
+            
             $table->decimal('monto', 10, 2);
             $table->enum('estado', ['pendiente', 'completado', 'cancelado'])->default('pendiente');
             $table->string('metodoPago');

@@ -10,10 +10,23 @@ return new class extends Migration
     {
         Schema::create('servicios', function (Blueprint $table) {
             $table->bigIncrements('IdServicio');
-            $table->foreignId('IdUsuario')->constrained('users')->onDelete('cascade');
-            $table->foreignId('IdTrabajador')->constrained('trabajadores')->onDelete('cascade');
-            $table->foreignId('IdCategoria')->constrained('categorias')->onDelete('cascade');
-            $table->foreignId('IdDireccionesCliente')->constrained('direccionesCliente')->onDelete('cascade');
+            
+            //Relacion Usuario
+            $table->unsignedBigInteger('IdUsuario');
+            $table->foreign('IdUsuario')->references('IdUsuario')->on('users')->onDelete('cascade');
+            
+            //Relacion Trabajador
+            $table->unsignedBigInteger('IdTrabajador');
+            $table->foreign('IdTrabajador')->references('IdTrabajador')->on('trabajadores')->onDelete('cascade');
+            
+            //Relacion Categoria
+            $table->unsignedBigInteger('IdCategoria');
+            $table->foreign('IdCategoria')->references('IdCategoria')->on('categorias')->onDelete('cascade');
+            
+            //Relacion Direccion Cliente
+            $table->unsignedBigInteger('IdDireccionesCliente');
+            $table->foreign('IdDireccionesCliente')->references('IdDireccionesCliente')->on('direccionesCliente')->onDelete('cascade');
+            
             $table->date('fecha');
             $table->time('horaInicial');
             $table->text('descripcion');

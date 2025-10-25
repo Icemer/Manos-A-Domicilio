@@ -10,8 +10,15 @@ return new class extends Migration
     {
         Schema::create('direccionesCliente', function (Blueprint $table) {
             $table->bigIncrements('IdDireccionesCliente');
-            $table->foreignId('IdUsuario')->constrained('users')->onDelete('cascade');
-            $table->foreignId('IdZona')->constrained('zonas')->onDelete('cascade');
+            
+            //Relacion Usuario
+            $table->unsignedBigInteger('IdUsuario');
+            $table->foreign('IdUsuario')->references('IdUsuario')->on('users')->onDelete('cascade');
+            
+            //Relacion Zona
+            $table->unsignedBigInteger('IdZona');
+            $table->foreign('IdZona')->references('IdZona')->on('zonas')->onDelete('cascade');
+            
             $table->string('calle');
             $table->string('número');
             $table->string('colonia');

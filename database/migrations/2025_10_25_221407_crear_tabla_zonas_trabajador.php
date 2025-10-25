@@ -10,14 +10,21 @@ return new class extends Migration
     {
         Schema::create('zonasTrabajador', function (Blueprint $table) {
             $table->bigIncrements('IdZonasTrabajador');
-            $table->foreignId('IdTrabajador')->constrained('trabajadores')->onDelete('cascade');
-            $table->foreignId('IdZona')->constrained('zonas')->onDelete('cascade');
+            
+            //Relacion Trabajador
+            $table->unsignedBigInteger('IdTrabajador');
+            $table->foreign('IdTrabajador')->references('IdTrabajador')->on('trabajadores')->onDelete('cascade');
+            
+            //Relacion Zona
+            $table->unsignedBigInteger('IdZona');
+            $table->foreign('IdZona')->references('IdZona')->on('zonas')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('zonas_trabajador');
+        Schema::dropIfExists('zonasTrabajador');
     }
 };

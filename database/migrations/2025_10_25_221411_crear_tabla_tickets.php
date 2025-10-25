@@ -10,7 +10,11 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->bigIncrements('IdTickets');
-            $table->foreignId('IdServicio')->constrained('servicios')->onDelete('cascade');
+            
+            //Relacion Servicio
+            $table->unsignedBigInteger('IdServicio');
+            $table->foreign('IdServicio')->references('IdServicio')->on('servicios')->onDelete('cascade');
+            
             $table->text('descripcion');
             $table->enum('estado', ['abierto', 'en_proceso', 'resuelto', 'cerrado'])->default('abierto');
             $table->timestamps();

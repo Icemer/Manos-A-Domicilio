@@ -10,8 +10,15 @@ return new class extends Migration
     {
         Schema::create('trabajadores', function (Blueprint $table) {
             $table->bigIncrements('IdTrabajador');
-            $table->foreignId('IdUsuario')->constrained('users')->onDelete('cascade');
-            $table->foreignId('IdCategoria')->constrained('categorias')->onDelete('cascade');
+            
+            //Relacion Usuario
+            $table->unsignedBigInteger('IdUsuario');
+            $table->foreign('IdUsuario')->references('IdUsuario')->on('users')->onDelete('cascade');
+            
+            //Relacion Categoria
+            $table->unsignedBigInteger('IdCategoria');
+            $table->foreign('IdCategoria')->references('IdCategoria')->on('categorias')->onDelete('cascade');
+            
             $table->boolean('disponibilidad')->default(true);
             $table->text('descripcion')->nullable();
             $table->timestamps();

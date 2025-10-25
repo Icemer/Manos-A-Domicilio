@@ -10,14 +10,21 @@ return new class extends Migration
     {
         Schema::create('trabajadoresFavoritos', function (Blueprint $table) {
             $table->bigIncrements('IdTrabajadoresFavoritos');
-            $table->foreignId('IdUsuario')->constrained('users')->onDelete('cascade');
-            $table->foreignId('IdTrabajador')->constrained('trabajadores')->onDelete('cascade');
+            
+            //Relacion Usuario
+            $table->unsignedBigInteger('IdUsuario');
+            $table->foreign('IdUsuario')->references('IdUsuario')->on('users')->onDelete('cascade');
+            
+            //Relacion Trabajador
+            $table->unsignedBigInteger('IdTrabajador');
+            $table->foreign('IdTrabajador')->references('IdTrabajador')->on('trabajadores')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('trabajadores_favoritos');
+        Schema::dropIfExists('trabajadoresFavoritos');
     }
 };
